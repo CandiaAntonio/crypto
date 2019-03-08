@@ -27,16 +27,16 @@ cryptodata_tbl <- read_excel(
 library(tidyverse)
 library(tidyquant)
 
-cryptodata_tbl %>% 
-    glimpse() %>% 
+cryptodata_tbl %>%
+    glimpse() %>%
     summary()
 
-cryptodata_long_tblt <- cryptodata_tbl %>% 
-    gather(key = "key", value = "value", -date)
+cryptodata_long_tblt <- cryptodata_tbl %>%
+    gather(key = "key", value = "value",-date)
 
 
-prices_graph <- cryptodata_long_tblt %>% 
+prices_graph <- cryptodata_long_tblt %>%
     ggplot(aes(x = date, y = value)) +
     geom_line() +
-    facet_wrap(~key, scales = "free") + 
-    theme_tq()    
+    facet_wrap( ~ key, scales = "free") +
+    theme_tq()
