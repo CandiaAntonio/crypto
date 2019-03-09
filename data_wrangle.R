@@ -34,7 +34,7 @@ cryptodata_tbl %>%
 
 # Tidying to long data
 # Assets reordering as factors 
-# Factors ordered by risk
+# Factors ordered by risk----
 
 cryptodata_long_tblt <- cryptodata_tbl %>%
     gather(key = "asset", value = "prices", -date) %>% 
@@ -59,7 +59,7 @@ cryptodata_long_tblt <- cryptodata_tbl %>%
     glimpse()
 
 
-# Visualizing prices graph
+# Visualizing prices graph----
 
 daily_prices_graph <- cryptodata_long_tblt %>%
     ggplot(aes(x = date, y = prices)) +
@@ -69,13 +69,13 @@ daily_prices_graph <- cryptodata_long_tblt %>%
 
 daily_prices_graph
 
-# Converting Daily Prices to daily returns in the tidyquant world
+# Converting Daily Prices to daily returns in the tidyquant world----
 
 returns_daily_long_tbl <- cryptodata_long_tblt %>% 
     group_by(asset) %>% 
     mutate(returns = (log(prices) - log(lag(prices))))
 
-# Visualizing returns graph
+# Visualizing returns graph----
 
 returns_graph <- returns_daily_long_tbl %>% 
     ggplot(aes(x = date, y = returns)) +
@@ -85,7 +85,7 @@ returns_graph <- returns_daily_long_tbl %>%
     
 returns_graph    
 
-# Convert data to tibbletime from daily to monthly
+# Convert data to tibbletime from daily to monthly----
 
 library(tibbletime)
 
@@ -104,7 +104,7 @@ monthly_prices_graph <- data_monthly_tbl %>%
 monthly_prices_graph
 
 
-# Converting Daily Prices to daily returns in the tidyquant world
+# Converting monthly prices to monthly returns----
     
 returns_monthly_long_tbl <- data_monthly_tbl %>% 
     group_by(asset) %>% 
